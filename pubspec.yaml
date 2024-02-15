@@ -13,13 +13,15 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.1.0
+  transparent_image: ^2.0.1
 
 dev_dependencies:
-
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
 flutter:
+  assets:
+    - assets/Images/YBPRE2846.JPG
 
   uses-material-design: true
