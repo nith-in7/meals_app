@@ -1,8 +1,7 @@
 name: meals_app
 description: "A new Flutter project."
 
-
-publish_to: 'none' 
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -10,52 +9,17 @@ environment:
   sdk: '>=3.2.6 <4.0.0'
 
 dependencies:
+  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  
-  cupertino_icons: ^1.0.2
+  google_fonts: ^6.1.0
 
 dev_dependencies:
+
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
-    
-  flutter_lints: ^2.0.0
-
-
-
 flutter:
-  
-    
+
   uses-material-design: true
-
-  
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
