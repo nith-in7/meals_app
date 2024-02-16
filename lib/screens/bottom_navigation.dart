@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meals_app/model/meal.dart';
 import 'package:meals_app/screens/categories_screen.dart';
 import 'package:meals_app/screens/meal_screen.dart';
+import 'package:meals_app/widgets/drawer_widget.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   const BottomNavigationScreen({
@@ -48,20 +49,24 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
       );
     }
     return Scaffold(
+      drawer: const DrawerWidget(),
       appBar: AppBar(title: Text(_title)),
       body: _selectedScreen,
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: (value) {
-            setState(() {
+        currentIndex: _selectedIndex,
+        onTap: (value) {
+          setState(
+            () {
               _selectedIndex = value;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.restaurant_sharp), label: "Categories"),
-            BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favorites"),
-          ]),
+            },
+          );
+        },
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.restaurant_sharp), label: "Categories"),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favorites"),
+        ],
+      ),
     );
   }
 }
