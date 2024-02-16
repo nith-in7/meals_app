@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meals_app/screens/categories_screen.dart';
+import 'package:meals_app/screens/bottom_navigation.dart';
 final theme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
@@ -16,6 +16,6 @@ class MealApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: theme, home:  const CategoryScreen());
+    return MaterialApp(theme: theme, home:  const BottomNavigationScreen());
   }
 }

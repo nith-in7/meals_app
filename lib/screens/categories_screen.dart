@@ -5,30 +5,29 @@ import 'package:meals_app/model/meal.dart';
 import 'package:meals_app/screens/meal_screen.dart';
 import 'package:meals_app/widgets/category_grid_item.dart';
 
-void _selectCategory(BuildContext context, Category category) {
-  final List<Meal> meal =
-      dummyMeals.where((e) => e.categories.contains(category.id)).toList();
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (ctx) {
-        return MealScreen(
-          category: category,
-          meals: meal,
-        );
-      },
-    ),
-  );
-}
-
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key});
+  const CategoryScreen({super.key, required this.onToggleFavotite});
+  final void Function(Meal meal) onToggleFavotite;
+  void _selectCategory(BuildContext context, Category category) {
+    final List<Meal> meal =
+        dummyMeals.where((e) => e.categories.contains(category.id)).toList();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) {
+          return MealScreen(
+            title: category.title,
+            meals: meal,
+            onToggleFavotite: onToggleFavotite,
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Pick the Cateogory")),
-      body: GridView(
+    return GridView(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -45,8 +44,6 @@ class CategoryScreen extends StatelessWidget {
               child: CategoryGrid(category: e),
             ),
           ),
-        ],
-      ),
-    );
+        ]);
   }
 }

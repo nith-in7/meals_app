@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:meals_app/model/meal.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+
+
 class MealIteams extends StatelessWidget {
-  const MealIteams({super.key, required this.meal});
+  const MealIteams({super.key, required this.meal, required this.selectedMeal});
   final Meal meal;
+  final void Function(Meal meal, BuildContext context) selectedMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +17,9 @@ class MealIteams extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       elevation: 10,
       child: InkWell(
+        onTap: () {
+          selectedMeal(meal,context);
+        },
         child: Stack(
           children: [
             FadeInImage(
@@ -59,7 +65,9 @@ class MealIteams extends StatelessWidget {
                           width: 12,
                         ),
                         const Icon(Icons.work_outline),
-                        const SizedBox(width: 2,),
+                        const SizedBox(
+                          width: 2,
+                        ),
                         Text(
                           meal.complexity.name[0].toUpperCase() +
                               meal.complexity.name.substring(1),
@@ -74,10 +82,11 @@ class MealIteams extends StatelessWidget {
                               meal.affordability.name.substring(1),
                           style: const TextStyle(color: Colors.white),
                         )
-
                       ],
                     ),
-                    const SizedBox(height: 4,)
+                    const SizedBox(
+                      height: 4,
+                    )
                   ],
                 ),
               ),
