@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({super.key});
+ 
+  const DrawerWidget({super.key, required this.drawerOptionSelected});
+
+  final void Function(String identifier) drawerOptionSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +12,6 @@ class DrawerWidget extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -26,7 +28,6 @@ class DrawerWidget extends StatelessWidget {
             ),
             // padding: const EdgeInsets.all(20),
             child: Row(
-              
               children: [
                 Icon(Icons.fastfood,
                     size: 48, color: Theme.of(context).colorScheme.primary),
@@ -44,8 +45,8 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: (){
-              Navigator.pop(context);
+            onTap: () {
+              drawerOptionSelected("Meals");
             },
             title: Text(
               "Meals",
@@ -59,7 +60,9 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: (){},
+            onTap: () {
+              drawerOptionSelected("Filter");
+            },
             title: Text(
               "Filters",
               style: Theme.of(context).textTheme.titleSmall!.copyWith(

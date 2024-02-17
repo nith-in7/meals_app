@@ -9,10 +9,13 @@ class MealScreen extends StatelessWidget {
       this.title,
       required this.meals,
       required this.onToggleFavotite});
+
   final String? title;
+
   final List<Meal> meals;
+
   final void Function(Meal meal) onToggleFavotite;
-  
+
   void _selectMeal(Meal meal, BuildContext context) {
     Navigator.push(
       context,
@@ -56,6 +59,7 @@ class MealScreen extends StatelessWidget {
     if (title == null) {
       return content;
     }
+
     return Scaffold(
       appBar: AppBar(title: Text(title!)),
       body: content,

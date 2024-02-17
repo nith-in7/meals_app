@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:meals_app/model/category.dart';
 
 class CategoryGrid extends StatelessWidget {
+  
   const CategoryGrid({super.key, required this.category});
+  
   final Category category;
 
   @override

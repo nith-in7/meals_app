@@ -3,10 +3,14 @@ import 'package:meals_app/model/meal.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealDetails extends StatelessWidget {
+  
   const MealDetails(
       {super.key, required this.meal, required this.onToggleFavotite});
+  
   final Meal meal;
+  
   final void Function(Meal meal) onToggleFavotite;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
