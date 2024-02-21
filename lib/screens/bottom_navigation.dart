@@ -21,12 +21,10 @@ class _BottomNavigationScreenState
 
   String _title = "Categories";
 
-  Widget? _selectedScreen;
-
   @override
   Widget build(BuildContext context) {
     final favoriteList = ref.watch(favoriteProvider);
-    
+
     void drawerOptionSelected(String identifier) {
       Navigator.pop(context);
       if (identifier == "Meals") {
@@ -46,24 +44,27 @@ class _BottomNavigationScreenState
         );
       }
     }
-    
-  final availableMeal=ref.watch(filteredMeal);
+
+    final availableMeal = ref.watch(filteredMeal);
     if (_selectedIndex == 1) {
       _title = "Favorite";
-      _selectedScreen = MealScreen(
-        meals: favoriteList,
-      );
+      
     } else {
       _title = "Categories";
-      _selectedScreen = CategoryScreen(
-        availableMeal: availableMeal,
-      );
+      
     }
 
     return Scaffold(
       drawer: DrawerWidget(drawerOptionSelected: drawerOptionSelected),
       appBar: AppBar(title: Text(_title)),
-      body: _selectedScreen,
+      body: [
+        CategoryScreen(
+          availableMeal: availableMeal,
+        ),
+         MealScreen(
+        meals: favoriteList,
+      )
+      ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (value) {

@@ -6,19 +6,19 @@ import 'package:transparent_image/transparent_image.dart';
 
 class MealDetails extends ConsumerWidget {
   const MealDetails({super.key, required this.meal});
-
   final Meal meal;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favoriteList = ref.watch(favoriteProvider);
+    bool isFavorite = favoriteList.contains(meal);
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
               onPressed: () {
-                final isFavorite =
+                isFavorite =
                     ref.read(favoriteProvider.notifier).onToggleFavotite(meal);
                 final message =
                     isFavorite ? "Marked as favorite" : "Removed from favorite";
@@ -26,20 +26,31 @@ class MealDetails extends ConsumerWidget {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(message)));
               },
-              icon: Icon(favoriteList.contains(meal)
-                  ? Icons.star
-                  : Icons.star_border_outlined))
+              icon: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, animation) => RotationTransition(
+                  turns: Tween<double>(begin: 0.1,end: 0).animate(animation),
+                  child: child,
+                ),
+                child: Icon(
+                  isFavorite ? Icons.star : Icons.star_border_outlined,
+                  key: ValueKey(isFavorite),
+                ),
+              ))
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            FadeInImage(
-              width: double.infinity,
-              height: 300,
-              fit: BoxFit.cover,
-              placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(meal.imageUrl),
+            Hero(
+              tag: meal.id,
+              child: FadeInImage(
+                width: double.infinity,
+                height: 300,
+                fit: BoxFit.cover,
+                placeholder: MemoryImage(kTransparentImage),
+                image: NetworkImage(meal.imageUrl),
+              ),
             ),
             const SizedBox(
               height: 16,
